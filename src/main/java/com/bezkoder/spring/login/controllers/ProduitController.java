@@ -1,8 +1,10 @@
 package com.bezkoder.spring.login.controllers;
 
 import com.bezkoder.spring.login.models.Client;
+import com.bezkoder.spring.login.models.EmailDetails;
 import com.bezkoder.spring.login.models.Produit;
 import com.bezkoder.spring.login.repository.ProduitRepository;
+import com.bezkoder.spring.login.service.EmailService;
 import com.bezkoder.spring.login.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -64,5 +66,17 @@ public class ProduitController {
     @GetMapping("/retournerProduit/{id}")
     public Optional<Produit> retournerProduitById(@PathVariable Long id){
         return produitService.retournerProduitById(id);
+    }
+
+    @Autowired
+    private EmailService emailService;
+    @PostMapping("/sendMail")
+    public String
+    sendMail(@RequestBody EmailDetails details)
+    {
+        String status
+                = emailService.sendSimpleMail(details);
+
+        return status;
     }
 }

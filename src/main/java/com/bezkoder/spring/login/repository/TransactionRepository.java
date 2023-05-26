@@ -20,7 +20,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     public List<Transaction> services();
     @Query(value = " SELECT * FROM transaction  WHERE type_transaction = 'service_apre_vente'" , nativeQuery = true)
     public List<Transaction> service_apre_vente();
-    @Query(value = " SELECT * FROM Transaction WHERE date_ajout >= '2023-01-01'" , nativeQuery = true)
+    @Query(value = " SELECT * FROM Transaction WHERE date_ajout >= '2023-01-01' ORDER BY date_ajout DESC LIMIT 5" , nativeQuery = true)
     public List<Transaction> dateAjout();
 
     @Query(value = "Select * from Transaction  where  date_ajout >= NOW() - INTERVAL 1 Month " , nativeQuery = true)
